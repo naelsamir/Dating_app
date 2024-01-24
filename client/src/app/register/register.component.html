@@ -1,0 +1,32 @@
+<form [formGroup]="registerForm" (ngSubmit)="registerForm.valid && register()">
+    <h2 class="text-primary text-center">SignUp</h2>
+    <hr>
+    <div class="mb-3">
+        <label style="margin-right: 10px;"> I am a :</label>
+        <label class="form-check-label">
+            <input type="radio" value="male" class="form-check-input" formControlName="gender">Male
+        </label>
+        <label class="form-check-label">
+            <input type="radio" value="female" class="form-check-input ms-3" formControlName="gender">Female
+        </label>
+    </div>
+    <app-input [formControl]="$any(registerForm.controls['username'])" [label]="'Username'" ></app-input>
+    <app-input [formControl]="$any(registerForm.controls['knownAs'])" [label]="'known As'" ></app-input>
+    <app-date-picker [formControl]="$any(registerForm.controls['dateOfBirth'])" [label]="'date of birth'" [maxDate]="maxDate" ></app-date-picker>
+    <app-input [formControl]="$any(registerForm.controls['city'])" [label]="'city'" ></app-input>
+    <app-input [formControl]="$any(registerForm.controls['country'])" [label]="'country'" ></app-input>
+    <app-input [formControl]="$any(registerForm.controls['password'])" [label]="'Password'" [type]="'password'"></app-input>
+    <app-input [formControl]="$any(registerForm.controls['confirmPassword'])" [label]="'confirm password'" [type]="'password'"></app-input>
+ 
+    <div class="row" *ngIf="validationError">
+        <ul class="text-danger">
+            <li *ngFor="let error of validationError">{{error}}</li>
+        </ul>
+    </div>
+       
+    <div class="text-center">
+        <button [disabled]="!registerForm.valid" class="btn btn-primary me-2" type="submit">Register</button>
+        <button class="btn btn-secondry" type="button" (click)="cancel()" >Cancel</button>
+    </div>
+
+</form>
